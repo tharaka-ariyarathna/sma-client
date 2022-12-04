@@ -22,3 +22,5 @@ export const signUp = (formData) => async(dispatch) => {
         dispatch({type : 'AUTH_ERROR'})
     }
 }
+
+//This is for checking

@@ -1,6 +1,6 @@
 import axios from 'axios' ;
 
-const API = axios.create({baseURL: "https://sma-mern.herokuapp.com"}) ;
+const API = axios.create({baseURL: "https://sma-server.vercel.app/"}) ;
 
 export const uploadImage = (data) => API.post("/upload/", data);
 
