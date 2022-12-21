@@ -50,7 +50,7 @@ const SignUp = () => {
     return(
         <div className='a-right'>
             <form className='infoForm loginForm' onSubmit={handleFormSubmit}>
-                <h3>{isSignedUp? "Login" : "Sign Up"}</h3>
+                <h3>{isSignedUp? "Login!" : "Sign Up"}</h3>
                 {!isSignedUp &&  <div >
                     <input 
                     type='text'
