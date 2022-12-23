@@ -36,7 +36,7 @@ const SignUp = () => {
                     dispatch(login(data)) ;
                 }
             }else{
-                console.log("Password too short") ;
+                console.log("Password is too short") ;
             }
         }else{
             if(!isSignedUp){
