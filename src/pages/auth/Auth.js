@@ -26,13 +26,26 @@ const SignUp = () => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault() ;
-
-        if(!isSignedUp){
-            data.password === data.confirmPassword 
-            ? dispatch(signUp(data)) 
-            : setConfirmPass(false) ;
+        if(e.target[0].name=='firstname'){
+            if(data.password.length >= 7){
+                if(!isSignedUp){
+                    data.password === data.confirmPassword 
+                    ? dispatch(signUp(data)) 
+                    : setConfirmPass(false) ;
+                }else{
+                    dispatch(login(data)) ;
+                }
+            }else{
+                console.log("Password too short") ;
+            }
         }else{
-            dispatch(login(data)) ;
+            if(!isSignedUp){
+                data.password === data.confirmPassword 
+                ? dispatch(signUp(data)) 
+                : setConfirmPass(false) ;
+            }else{
+                dispatch(login(data)) ;
+            }
         }
     }
 
@@ -57,6 +70,8 @@ const SignUp = () => {
                     className='infoInput'
                     placeholder='First Name'
                     name='firstname'
+                    required
+                    autoComplete='off'
                     onChange={handleInputChange}
                     value={data.firstname}
                     />
@@ -65,6 +80,8 @@ const SignUp = () => {
                         className='infoInput'
                         placeholder='Last Name'
                         name='lastname'
+                        required
+                        autoComplete='off'
                         onChange={handleInputChange}
                         value={data.lastname}
                     />
@@ -75,6 +92,8 @@ const SignUp = () => {
                         className='infoInput'
                         placeholder='Username'
                         name='username'
+                        required
+                        autoComplete='off'
                         onChange={handleInputChange}
                         value={data.username}
                     />
@@ -85,6 +104,7 @@ const SignUp = () => {
                         className='infoInput'
                         placeholder='Password'
                         name='password'
+                        required
                         onChange={handleInputChange}
                         value={data.password}
                     />
@@ -93,6 +113,7 @@ const SignUp = () => {
                         className='infoInput'
                         placeholder='Confirm Password '
                         name='confirmPassword'
+                        required
                         onChange={handleInputChange}
                         value={data.confirmPassword}
                     />}
