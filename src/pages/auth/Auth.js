@@ -19,6 +19,7 @@ const SignUp = () => {
     })
 
     const [confirmPass, setConfirmPass] = useState(true) ;
+    const [validPass, setValidPass] = useState(true) ;
 
     const handleInputChange = (e) => {
         setData({...data, [e.target.name]: e.target.value})
@@ -28,6 +29,7 @@ const SignUp = () => {
         e.preventDefault() ;
         if(e.target[0].name=='firstname'){
             if(data.password.length >= 7){
+                setValidPass(true) ;
                 if(!isSignedUp){
                     data.password === data.confirmPassword 
                     ? dispatch(signUp(data)) 
@@ -36,7 +38,7 @@ const SignUp = () => {
                     dispatch(login(data)) ;
                 }
             }else{
-                console.log("Password is too short") ;
+                setValidPass(false) ;
             }
         }else{
             if(!isSignedUp){
@@ -118,6 +120,13 @@ const SignUp = () => {
                         value={data.confirmPassword}
                     />}
                 </div>
+
+                <span 
+                    style={{display: validPass? "none" : "block",  color:"red",
+                    fontSize:"12px", margin:"5px",marginRight:"5%", alignSelf:"self-end"}}
+                >
+                    ∗ Password is too short
+                </span>
 
                 <span 
                     style={{display: confirmPass? "none" : "block",  color:"red",
