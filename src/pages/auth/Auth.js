@@ -177,6 +177,7 @@ const SignUp = () => {
             onClick={() => {
               setIsSignedUp((prev) => !prev);
               resetForm();
+              localStorage.removeItem("error") ;
             }}
           >
             {isSignedUp
