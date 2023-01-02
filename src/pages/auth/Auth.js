@@ -165,7 +165,7 @@ const SignUp = () => {
             alignSelf: "self-end",
           }}
         >
-          {JSON.parse(localStorage.getItem("error")) && JSON.parse(localStorage.getItem("error")).data ===
+          {JSON.parse(localStorage.getItem("error")) && !isSignedUp && JSON.parse(localStorage.getItem("error")).data ===
           "Usename already taken"
             ? "*Usename already taken"
             : "*Incorrect Username or Password"}
