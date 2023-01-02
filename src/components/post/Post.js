@@ -1,29 +1,33 @@
-import React from 'react'
-import './Post.css' ;
-import Like from '../../img/like.png' ;
-import NotLike from '../../img/notlike.png' ;
-import Comment from '../../img/comment.png' ;
-import Share from '../../img/share.png' ;
+import React from "react";
+import "./Post.css";
+import Like from "../../img/like.png";
+import NotLike from "../../img/notlike.png";
+import Comment from "../../img/comment.png";
+import Share from "../../img/share.png";
 
-const Post = ({data}) => {
+const Post = ({ data }) => {
   return (
-    <div className='post'>
-        <img src={data.image} />
+    <div className="post">
+      <img src={data.image} />
 
-        <div className='postReact'>
-          <img src={data.liked? Like : NotLike} />
-          <img src={Comment}/>
-          <img src={Share} />  
-        </div>
+      <div className="postReact">
+        <img src={data.liked ? Like : NotLike} />
+        <img src={Comment} />
+        <img src={Share} />
+      </div>
 
-        <span style={{color:'var(--gray)', fontSize:'12px'}}>{data.likes} likes</span>
+      <span style={{ color: "var(--gray)", fontSize: "12px" }}>
+        {data.likes} likes
+      </span>
 
-        <div className='details'>
-          <span><b>{data.name}&nbsp;&nbsp;&nbsp;</b></span>
-          <span>{data.description}</span>
-        </div>
+      <div className="details">
+        <span>
+          <b>{data.name}&nbsp;&nbsp;&nbsp;</b>
+        </span>
+        <span>{data.description}</span>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;

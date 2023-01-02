@@ -1,80 +1,82 @@
-import { Modal, useMantineTheme } from '@mantine/core';
-import '../../pages/auth/Auth.css' ;
+import { Modal, useMantineTheme } from "@mantine/core";
+import "../../pages/auth/Auth.css";
 
-const ProfileModal = ({modalOpened , setModalOpened}) => {
+const ProfileModal = ({ modalOpened, setModalOpened }) => {
   const theme = useMantineTheme();
 
   return (
     <Modal
-      overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
+      overlayColor={
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[9]
+          : theme.colors.gray[2]
+      }
       overlayOpacity={0.55}
-      size='55%' 
+      size="55%"
       overlayBlur={3}
       opened={modalOpened}
-      onClose={()=>setModalOpened(false)}
+      onClose={() => setModalOpened(false)}
     >
-    <form className='infoForm'>
-      <h3>Edit your info</h3>
+      <form className="infoForm">
+        <h3>Edit your info</h3>
 
-      <div>
-          <input 
-              type='text'
-              className='infoInput'
-              placeholder='First Name'
-              name='firstName'
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            placeholder="First Name"
+            name="firstName"
           />
-          <input 
-              type='text'
-              className='infoInput'
-              placeholder='Last Name'
-              name='lastName'
+          <input
+            type="text"
+            className="infoInput"
+            placeholder="Last Name"
+            name="lastName"
           />
-      </div>
+        </div>
 
-      <div>
-          <input 
-              type='text'
-              className='infoInput'
-              placeholder='Relationship Status'
-              name='relationshipStatus'
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            placeholder="Relationship Status"
+            name="relationshipStatus"
           />
-      </div>
+        </div>
 
-      <div>
-          <input 
-              type='text'
-              className='infoInput'
-              placeholder='Lives In'
-              name='livesIn'
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            placeholder="Lives In"
+            name="livesIn"
           />
-          <input 
-              type='text'
-              className='infoInput'
-              placeholder='Country'
-              name='country'
+          <input
+            type="text"
+            className="infoInput"
+            placeholder="Country"
+            name="country"
           />
-      </div>
+        </div>
 
-      <div>
-          <input 
-              type='text'
-              className='infoInput'
-              placeholder='Works At'
-              name='worksAt'
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            placeholder="Works At"
+            name="worksAt"
           />
-      </div>
+        </div>
 
-      <div>
-        Profile Image
-        <input type='file' name='profileImage' />
-        Cover Image
-        <input type='file' name='coverImage' />
-      </div>
-
-    </form>
+        <div>
+          Profile Image
+          <input type="file" name="profileImage" />
+          Cover Image
+          <input type="file" name="coverImage" />
+        </div>
+      </form>
     </Modal>
   );
-}
+};
 
-export default ProfileModal ;
-
+export default ProfileModal;
