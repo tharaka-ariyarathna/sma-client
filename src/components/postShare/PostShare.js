@@ -62,9 +62,7 @@ const PostShare = () => {
           },
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              console.log(downloadURL);
               newPost.image_url = downloadURL;
-              console.log(newPost);
               dispatch(uploadPost(newPost));
             });
           }
