@@ -10,6 +10,8 @@ import {
 } from "@iconscout/react-unicons";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImage, uploadPost } from "../../actions/UploadActions";
+import storage from "../../firebase/firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const PostShare = () => {
   const [image, setImage] = useState(null);
@@ -43,13 +45,35 @@ const PostShare = () => {
       data.append("name", filename);
       data.append("file", image);
       newPost.image = filename;
+
       try {
-        dispatch(uploadImage(data));
+        const storageRef = ref(storage, `images/${filename}`);
+        const uploadTask = uploadBytesResumable(storageRef, image);
+
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+          },
+          (error) => {
+            alert(error);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              console.log(downloadURL);
+              newPost.image_url = downloadURL;
+              console.log(newPost);
+              dispatch(uploadPost(newPost));
+            });
+          }
+        );
+        //dispatch(uploadImage(data));
       } catch (error) {
         console.log(error);
       }
 
-      dispatch(uploadPost(newPost));
       reset();
     }
   };

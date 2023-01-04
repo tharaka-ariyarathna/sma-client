@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 
 const App = () => {
   const user = useSelector((state) => state.Authreducer.authData);
-  console.log(user);
   return (
     <div className="App">
       <div className="blur" style={{ top: "-18%", right: "0" }}></div>
