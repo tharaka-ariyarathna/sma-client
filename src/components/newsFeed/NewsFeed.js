@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Post from "../post/Post";
+import { getTimelinePosts } from "../../actions/PostActions";
 import {useDispatch, useSelector} from 'react-redux' ;
-import { PostsData } from "../../data/PostData";
 import "./NewsFeed.css";
 
 const NewsFeed = () => {
@@ -11,7 +11,8 @@ const NewsFeed = () => {
 
   useEffect(() => {
     dispatch(getTimelinePosts(user._id))
-  }, [])
+    console.log(user._id) ;
+  }, [user._id])
 
   return (
     <div className="newsFeed">
