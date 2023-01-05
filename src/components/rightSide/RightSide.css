@@ -10,7 +10,16 @@
   justify-content: space-between;
 }
 
+.navIcons:hover {
+  cursor: pointer;
+}
+
 .navIcons > img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.navIcons > a > img {
   width: 1.5rem;
   height: 1.5rem;
 }
