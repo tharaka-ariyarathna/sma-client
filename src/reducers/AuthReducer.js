@@ -8,6 +8,7 @@ const Authreducer = (
     case "AUTH_SUCCESS":
       localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
       localStorage.removeItem("error") ;
+      console.log(action.data.data) ;
       return { ...state, authData: action.data, loading: false, error: false };
     case "AUTH_ERROR":
       localStorage.setItem("error", JSON.stringify({ ...action?.error }));

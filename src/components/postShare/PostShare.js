@@ -74,7 +74,6 @@ const PostShare = () => {
     }else{
       dispatch(uploadPost(newPost));
     }
-
     reset();
   };
 
