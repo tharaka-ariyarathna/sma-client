@@ -12,7 +12,7 @@ const NewsFeed = () => {
   useEffect(() => {
     dispatch(getTimelinePosts(user._id))
     console.log(user._id) ;
-  }, [user._id])
+  }, [])
 
   return (
     <div className="newsFeed">
