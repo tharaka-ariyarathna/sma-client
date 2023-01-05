@@ -1,28 +1,34 @@
 import React from "react";
-import CoverImage from "../../img/cover.jpg";
-import ProfileImage from "../../img/profileImg.jpg";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import DefaultCoverImage from "../../img/cover.jpg";
+import DefaultImage from "../../img/avatar1.png";
 import "./ProfileCard.css";
 
-const ProfileCard = () => {
-  const isInProfile = true;
+const ProfileCard = ({ location }) => {
+  const { user } = useSelector((state) => state.Authreducer.authData.data);
+
+  const { posts } = useSelector((state) => state.PostReducer);
+
+  console.log(location);
 
   return (
     <div className="profileCard">
       <div className="profileImages">
-        <img src={CoverImage} alt="Cover Photo" />
-        <img src={ProfileImage} alt="Profile Pic" />
+        <img src={DefaultCoverImage} alt="Cover Photo" />
+        <img src={DefaultImage} alt="Profile Pic" />
       </div>
 
       <div className="profileName">
-        <span>Katie Wilson</span>
-        <span>Professional Skater </span>
+        <span>{`${user.firstname} ${user.lastname}`}</span>
+        <span>{user.worksAt ? user.worksAt : "Tell about yourself"} </span>
       </div>
 
       <div className="followStatus">
         <hr />
         <div>
           <div className="follow">
-            <span>6890</span>
+            <span>{user.followers.length}</span>
             <span>Followers</span>
           </div>
           <div className="vl"></div>
@@ -30,11 +36,11 @@ const ProfileCard = () => {
             <span>1</span>
             <span>Followings</span>
           </div>
-          {isInProfile && (
+          {location === "profilepage" && (
             <>
               <div className="vl"></div>
               <div className="follow">
-                <span>4</span>
+                <span>{posts.filter(post => post.userId === user._id).length}</span>
                 <span>Posts</span>
               </div>
             </>
@@ -43,9 +49,17 @@ const ProfileCard = () => {
         <hr />
       </div>
 
-      {!isInProfile && (
+      {location === "homepage" && (
         <>
-          <span>My profile</span>
+          <span>
+            <Link
+              to={`/profile/${user._id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              {" "}
+              My Profile{" "}
+            </Link>
+          </span>
         </>
       )}
     </div>

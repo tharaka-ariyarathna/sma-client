@@ -21,5 +21,6 @@
 }
 
 .postReact > img:hover {
+  color: #334d4d;
   cursor: pointer;
 }
