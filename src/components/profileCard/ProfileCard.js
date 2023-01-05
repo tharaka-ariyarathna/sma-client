@@ -5,10 +5,10 @@ import DefaultCoverImage from "../../img/cover.jpg";
 import DefaultImage from "../../img/avatar1.png";
 import "./ProfileCard.css";
 
-const ProfileCard = () => {
+const ProfileCard = ({location}) => {
   const { user } = useSelector((state) => state.Authreducer.authData.data);
 
-  const isInProfile = false;
+  console.log(location) ;
 
   return (
     <div className="profileCard">
@@ -34,7 +34,7 @@ const ProfileCard = () => {
             <span>1</span>
             <span>Followings</span>
           </div>
-          {isInProfile && (
+          {location ==='profilepage' && (
             <>
               <div className="vl"></div>
               <div className="follow">
@@ -47,10 +47,10 @@ const ProfileCard = () => {
         <hr />
       </div>
 
-      {!isInProfile && (
+      {location !=='profilepage'  && (
         <>
           <span>
-            <Link style={{textDecoration:"none", color:"inherit"}} to={`/profile/${user._id}`}>My Profile</Link>
+            <Link to={`/profile/${user._id}`} style={{textDecoration:"none", color:"inherit"}}>  My Profile </Link>
           </span>
         </>
       )}
