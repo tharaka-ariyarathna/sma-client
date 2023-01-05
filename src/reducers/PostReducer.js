@@ -1,4 +1,4 @@
-const postReducer = (
+const PostReducer = (
   state = { posts: [], loading: false, error: false, uploading: false },
   action
 ) => {
@@ -19,4 +19,4 @@ const postReducer = (
   }
 };
 
-export default postReducer;
+export default PostReducer;

@@ -19,7 +19,7 @@ const PostShare = () => {
   const description = useRef();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.Authreducer.authData.data);
-  const uploading = useSelector((state) => state.postReducer.uploading);
+  const uploading = useSelector((state) => state.PostReducer.uploading);
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {

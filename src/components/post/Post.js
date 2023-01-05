@@ -8,7 +8,9 @@ import Share from "../../img/share.png";
 const Post = ({ data }) => {
   return (
     <div className="post">
-      <img src={data.image} />
+      {data.image && (
+        <img src={data.image_url} />
+      )} 
 
       <div className="postReact">
         <img src={data.liked ? Like : NotLike} />
