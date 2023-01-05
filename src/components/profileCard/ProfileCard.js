@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import {Link} from 'react-router-dom' ;
 import DefaultCoverImage from "../../img/cover.jpg";
 import DefaultImage from "../../img/avatar1.png";
 import "./ProfileCard.css";
@@ -7,25 +8,25 @@ import "./ProfileCard.css";
 const ProfileCard = () => {
   const { user } = useSelector((state) => state.Authreducer.authData.data);
 
-  const isInProfile = true;
+  const isInProfile = false;
 
   return (
     <div className="profileCard">
       <div className="profileImages">
-        <img src={ user.coverImage? user.coverImage : DefaultCoverImage} alt="Cover Photo" />
-        <img src={ user.profileImage? user.profileImage : DefaultImage} alt="Profile Pic" />
+        <img src={DefaultCoverImage} alt="Cover Photo" />
+        <img src={DefaultImage} alt="Profile Pic" />
       </div>
 
       <div className="profileName">
-        <span>Katie Wilson</span>
-        <span>Professional Skater </span>
+        <span>{`${user.firstname} ${user.lastname}`}</span>
+        <span>{user.worksAt? user.worksAt : "Tell about yourself"} </span>
       </div>
 
       <div className="followStatus">
         <hr />
         <div>
           <div className="follow">
-            <span>6890</span>
+            <span>{user.followers.length}</span>
             <span>Followers</span>
           </div>
           <div className="vl"></div>
@@ -48,7 +49,9 @@ const ProfileCard = () => {
 
       {!isInProfile && (
         <>
-          <span>My profile</span>
+          <span>
+            <Link style={{textDecoration:"none", color:"inherit"}} to={`/profile/${user._id}`}>My Profile</Link>
+          </span>
         </>
       )}
     </div>
