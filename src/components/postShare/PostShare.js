@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import ProfileImage from "../../img/profileImg.jpg";
+import DefaultImage from "../../img/avatar1.png";
 import "./PostShare.css";
 import {
   UilScenery,
@@ -71,7 +71,7 @@ const PostShare = () => {
       } catch (error) {
         console.log(error);
       }
-    }else{
+    } else {
       dispatch(uploadPost(newPost));
     }
     reset();
@@ -79,7 +79,7 @@ const PostShare = () => {
 
   return (
     <div className="postShare">
-      <img src={ProfileImage} alt="User" />
+      <img src={user.profileImage? user.profileImage : DefaultImage} alt="User" />
       <div>
         <input
           type="text"

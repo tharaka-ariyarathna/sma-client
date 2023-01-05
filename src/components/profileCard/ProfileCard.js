@@ -1,16 +1,19 @@
 import React from "react";
-import CoverImage from "../../img/cover.jpg";
-import ProfileImage from "../../img/profileImg.jpg";
+import { useSelector } from "react-redux";
+import DefaultCoverImage from "../../img/cover.jpg";
+import DefaultImage from "../../img/avatar1.png";
 import "./ProfileCard.css";
 
 const ProfileCard = () => {
+  const { user } = useSelector((state) => state.Authreducer.authData.data);
+
   const isInProfile = true;
 
   return (
     <div className="profileCard">
       <div className="profileImages">
-        <img src={CoverImage} alt="Cover Photo" />
-        <img src={ProfileImage} alt="Profile Pic" />
+        <img src={ user.coverImage? user.coverImage : DefaultCoverImage} alt="Cover Photo" />
+        <img src={ user.profileImage? user.profileImage : DefaultImage} alt="Profile Pic" />
       </div>
 
       <div className="profileName">
