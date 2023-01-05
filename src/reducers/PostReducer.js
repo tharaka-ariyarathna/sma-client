@@ -1,4 +1,4 @@
-const postReducer = (
+const PostReducer = (
   state = { posts: [], loading: false, error: false, uploading: false },
   action
 ) => {
@@ -14,9 +14,20 @@ const postReducer = (
       };
     case "UPLOAD_FAIL":
       return { ...state, error: true, uploading: false };
+    case "RETRIEVING_START":
+      return { ...state, loading: true, error: false };
+    case "RETRIEVING_SUCCESS":
+      return {
+        ...state,
+        posts: action.data,
+        loading: false,
+        error: false,
+      };
+    case "RETRIEVING_FAILED" :
+      return {...state, error: true, loading: false}
     default:
       return state;
   }
 };
 
-export default postReducer;
+export default PostReducer;

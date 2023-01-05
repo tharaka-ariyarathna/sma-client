@@ -152,7 +152,7 @@ const SignUp = () => {
             alignSelf: "self-end",
           }}
         >
-          ∗ Password doesn't match
+          ∗ Password doesn't match"
         </span>
 
         <span
