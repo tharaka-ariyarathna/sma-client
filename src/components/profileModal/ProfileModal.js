@@ -1,8 +1,24 @@
 import { Modal, useMantineTheme } from "@mantine/core";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import "../../pages/auth/Auth.css";
 
-const ProfileModal = ({ modalOpened, setModalOpened }) => {
+const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const theme = useMantineTheme();
+
+  const { password, ...other } = data;
+  const [formData, setFormData] = useState(other);
+  const [profileImage, setProfileImage] = useState(null);
+  const [coverImage, setCoverImage] = useState(null);
+  const dispatch = useDispatch();
+  const params = useParams();
+  const { user } = useSelector((state) => state.Authreducer.authData.data);
+
+  const handleInputChange = (e) => {
+    const fieldName = e.target.name ;
+    setFormData({...formData, [e.target.name]: e.target.value})
+  }
 
   return (
     <Modal
@@ -26,12 +42,16 @@ const ProfileModal = ({ modalOpened, setModalOpened }) => {
             className="infoInput"
             placeholder="First Name"
             name="firstName"
+            onChange={handleInputChange}
+            value={formData.firstname}
           />
           <input
             type="text"
             className="infoInput"
             placeholder="Last Name"
             name="lastName"
+            onChange={handleInputChange}
+            value={formData.lastname}
           />
         </div>
 
@@ -40,7 +60,9 @@ const ProfileModal = ({ modalOpened, setModalOpened }) => {
             type="text"
             className="infoInput"
             placeholder="Relationship Status"
-            name="relationshipStatus"
+            name="relationship"
+            onChange={handleInputChange}
+            value={formData.relationship}
           />
         </div>
 
@@ -50,12 +72,16 @@ const ProfileModal = ({ modalOpened, setModalOpened }) => {
             className="infoInput"
             placeholder="Lives In"
             name="livesIn"
+            onChange={handleInputChange}
+            value={formData.livesIn}
           />
           <input
             type="text"
             className="infoInput"
             placeholder="Country"
             name="country"
+            onChange={handleInputChange}
+            value={formData.country}
           />
         </div>
 
@@ -65,6 +91,8 @@ const ProfileModal = ({ modalOpened, setModalOpened }) => {
             className="infoInput"
             placeholder="Works At"
             name="worksAt"
+            onChange={handleInputChange}
+            value={formData.worksAt}
           />
         </div>
 
