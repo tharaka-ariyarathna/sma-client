@@ -5,7 +5,7 @@ import img4 from "../img/img4.jpg";
 
 export const followers = [
   {
-    name: "Marty Nelson",
+    name: "George Wilson",
     username: "MartyN",
     image: img1,
   },
