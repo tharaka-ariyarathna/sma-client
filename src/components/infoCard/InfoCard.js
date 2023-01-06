@@ -83,7 +83,7 @@ const InfoCard = () => {
           <span>
             <b>Works at</b>
           </span>
-          <span>&nbsp;&nbsp; Dublin harbour</span>
+          <span>&nbsp;&nbsp; {profileUser.worksAt}</span>
         </div>
       ) : (
         ""

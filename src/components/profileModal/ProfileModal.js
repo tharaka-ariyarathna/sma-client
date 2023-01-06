@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import storage from "../../firebase/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { updateUser } from "../../actions/UserAction";
 import "../../pages/auth/Auth.css";
-import avatar from "../../img/boats_paris.jpg";
 import { async } from "@firebase/util";
 
 const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
@@ -39,7 +39,6 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
     const uploadTask = uploadBytesResumable(storageRef, image);
     await uploadTask ;
     const url = await getDownloadURL(uploadTask.snapshot.ref) ;
-    //console.log(url)
     return url ;
   };
 
@@ -56,7 +55,7 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
       coverImageUrl = await uploadImage(coverImage, "coverImage");
       userData.coverImage = coverImageUrl ;
     }
-    console.log(userData) ;
+    dispatch(updateUser(params.id, userData)) ;
   };
 
   return (
