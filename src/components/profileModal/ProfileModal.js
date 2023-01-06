@@ -1,8 +1,12 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import storage from "../../firebase/firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import "../../pages/auth/Auth.css";
+import avatar from "../../img/boats_paris.jpg";
+import { async } from "@firebase/util";
 
 const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const theme = useMantineTheme();
@@ -28,6 +32,46 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
         : setCoverImage(img);
     }
   };
+
+  const uploadImage = async (image, target) => {
+    console.log(profileImage) ;
+    if (profileImage) {
+      //const image = profileImage ;
+      try {
+        const filename = Date.now() + image.name;
+        const storageRef = ref(storage, `images/${filename}`);
+        const uploadTask = uploadBytesResumable(storageRef, image);
+
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+          },
+          (error) => {
+            alert(error);
+          },
+          async () => {
+            await getDownloadURL(uploadTask.snapshot.ref).then(
+              (downloadURL) => {
+                target === "profileImage"
+                ? setFormData({ ...formData, ["profileImage"]: downloadURL })
+                : setFormData({ ...formData, ["coverImage"]: downloadURL });
+              }
+            );
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    uploadImage(profileImage, "profileImage") ;
+    console.log(formData)
+  },[profileImage])
 
   return (
     <Modal
@@ -109,7 +153,7 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
           Profile Image
           <input type="file" name="profileImage" onChange={handleImageChange} />
           Cover Image
-          <input type="file" name="coverImage" onChange={handleImageChange}/>
+          <input type="file" name="coverImage" onChange={handleImageChange} />
         </div>
       </form>
     </Modal>
