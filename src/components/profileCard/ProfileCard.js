@@ -10,8 +10,6 @@ const ProfileCard = ({ location }) => {
 
   const { posts } = useSelector((state) => state.PostReducer);
 
-  console.log(location);
-
   return (
     <div className="profileCard">
       <div className="profileImages">
@@ -40,7 +38,9 @@ const ProfileCard = ({ location }) => {
             <>
               <div className="vl"></div>
               <div className="follow">
-                <span>{posts.filter(post => post.userId === user._id).length}</span>
+                <span>
+                  {posts.filter((post) => post.userId === user._id).length}
+                </span>
                 <span>Posts</span>
               </div>
             </>
