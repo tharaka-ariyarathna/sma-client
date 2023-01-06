@@ -23,8 +23,11 @@ const PostReducer = (
         loading: false,
         error: false,
       };
-    case "RETRIEVING_FAILED" :
-      return {...state, error: true, loading: false}
+    case "RETRIEVING_FAILED":
+      return { ...state, error: true, loading: false };
+    case "LOG_OUT":
+      localStorage.clear();
+      return { ...state, posts: [], loading: false, error: false };
     default:
       return state;
   }

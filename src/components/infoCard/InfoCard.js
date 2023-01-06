@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { UilPen } from "@iconscout/react-unicons";
 import ProfileModal from "../profileModal/ProfileModal";
 import * as UserApi from "../../api/UserApi";
+import { logOut } from "../../actions/AuthActions";
 import "./InfoCard.css";
 
 const InfoCard = () => {
@@ -31,6 +32,10 @@ const InfoCard = () => {
 
     fetchProfileUser();
   }, [user]);
+
+  const handleLogOut = () => {
+    dispatch(logOut()) ;
+  }
 
   return (
     <div className="infocard">
@@ -83,7 +88,7 @@ const InfoCard = () => {
         ""
       )}
       {profileUser._id === user._id ? (
-        <button className="button lo-button">Log Out</button>
+        <button className="button lo-button"  onClick={handleLogOut}>Log Out</button>
       ) : (
         ""
       )}
