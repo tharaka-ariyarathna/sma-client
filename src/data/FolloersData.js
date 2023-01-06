@@ -15,7 +15,7 @@ export const followers = [
     image: img2,
   },
   {
-    name: "Micha Alsop",
+    name: "Wiily Wonka",
     username: "chopAL",
     image: img3,
   },
