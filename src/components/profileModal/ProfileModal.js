@@ -16,9 +16,18 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const { user } = useSelector((state) => state.Authreducer.authData.data);
 
   const handleInputChange = (e) => {
-    const fieldName = e.target.name ;
-    setFormData({...formData, [e.target.name]: e.target.value})
-  }
+    const fieldName = e.target.name;
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleImageChange = (e) => {
+    if (e.target.files) {
+      let img = e.target.files[0];
+      e.target.name === "profileImage"
+        ? setProfileImage(img)
+        : setCoverImage(img);
+    }
+  };
 
   return (
     <Modal
@@ -98,9 +107,9 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
 
         <div>
           Profile Image
-          <input type="file" name="profileImage" />
+          <input type="file" name="profileImage" onChange={handleImageChange} />
           Cover Image
-          <input type="file" name="coverImage" />
+          <input type="file" name="coverImage" onChange={handleImageChange}/>
         </div>
       </form>
     </Modal>
