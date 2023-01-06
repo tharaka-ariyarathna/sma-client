@@ -33,45 +33,31 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
     }
   };
 
-  const uploadImage = async (image, target) => {
-    console.log(profileImage) ;
-    if (profileImage) {
-      //const image = profileImage ;
-      try {
-        const filename = Date.now() + image.name;
-        const storageRef = ref(storage, `images/${filename}`);
-        const uploadTask = uploadBytesResumable(storageRef, image);
-
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-          },
-          (error) => {
-            alert(error);
-          },
-          async () => {
-            await getDownloadURL(uploadTask.snapshot.ref).then(
-              (downloadURL) => {
-                target === "profileImage"
-                ? setFormData({ ...formData, ["profileImage"]: downloadURL })
-                : setFormData({ ...formData, ["coverImage"]: downloadURL });
-              }
-            );
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  const uploadImage = async (image) => {
+    const filename = Date.now() + image.name;
+    const storageRef = ref(storage, `images/${filename}`);
+    const uploadTask = uploadBytesResumable(storageRef, image);
+    await uploadTask ;
+    const url = await getDownloadURL(uploadTask.snapshot.ref) ;
+    //console.log(url)
+    return url ;
   };
 
-  useEffect(() => {
-    uploadImage(profileImage, "profileImage") ;
-    console.log(formData)
-  },[profileImage])
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    let userData = formData;
+    let coverImageUrl ;
+    let profileImageUrl ;
+    if (profileImage) {
+      profileImageUrl = await uploadImage(profileImage);
+      userData.profileImage = profileImageUrl ;
+    }
+    if (coverImage) {
+      coverImageUrl = await uploadImage(coverImage, "coverImage");
+      userData.coverImage = coverImageUrl ;
+    }
+    console.log(userData) ;
+  };
 
   return (
     <Modal
@@ -155,6 +141,10 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
           Cover Image
           <input type="file" name="coverImage" onChange={handleImageChange} />
         </div>
+
+        <button className="button infoButton" onClick={handleFormSubmit}>
+          Update
+        </button>
       </form>
     </Modal>
   );
