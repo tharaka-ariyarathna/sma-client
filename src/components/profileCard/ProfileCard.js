@@ -10,13 +10,11 @@ const ProfileCard = ({ location }) => {
 
   const { posts } = useSelector((state) => state.PostReducer);
 
-  console.log(location);
-
   return (
     <div className="profileCard">
       <div className="profileImages">
-        <img src={DefaultCoverImage} alt="Cover Photo" />
-        <img src={DefaultImage} alt="Profile Pic" />
+        <img src={user.coverImage? user.coverImage : DefaultCoverImage} alt="Cover Photo" />
+        <img src={user.profileImage? user.profileImage : DefaultCoverImage} alt="Profile Pic" />
       </div>
 
       <div className="profileName">
@@ -40,7 +38,9 @@ const ProfileCard = ({ location }) => {
             <>
               <div className="vl"></div>
               <div className="follow">
-                <span>{posts.filter(post => post.userId === user._id).length}</span>
+                <span>
+                  {posts.filter((post) => post.userId === user._id).length}
+                </span>
                 <span>Posts</span>
               </div>
             </>

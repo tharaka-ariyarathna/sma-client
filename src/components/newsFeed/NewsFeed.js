@@ -11,7 +11,6 @@ const NewsFeed = () => {
 
   useEffect(() => {
     dispatch(getTimelinePosts(user._id))
-    console.log(user._id) ;
   }, [])
 
   return (
