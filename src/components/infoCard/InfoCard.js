@@ -92,3 +92,5 @@ const InfoCard = () => {
 };
 
 export default InfoCard;
+
+/*{profileUser._id===userId || profileUser.relationship || profileUser.livesIn || profileUser.worksAt }*/
