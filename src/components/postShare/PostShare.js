@@ -10,7 +10,7 @@ import {
 } from "@iconscout/react-unicons";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImage, uploadPost } from "../../actions/UploadActions";
-import storage from "../../firebase/firebase";
+import storage from "../../firebase/firebaseConfig";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const PostShare = () => {
@@ -39,7 +39,7 @@ const PostShare = () => {
       description: description.current.value,
     };
 
-    if (image) {
+    /*if (image) {
       
       const data = new FormData();
       const filename = Date.now() + image.name;
@@ -74,7 +74,7 @@ const PostShare = () => {
       }
     } else {
       dispatch(uploadPost(newPost));
-    }
+    }*/
     reset();
   };
 

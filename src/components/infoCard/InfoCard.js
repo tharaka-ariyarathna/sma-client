@@ -58,12 +58,12 @@ const InfoCard = () => {
           ""
         )}
       </div>
-      {profileUser.relationShip ? (
+      {profileUser.relationship ? (
         <div className="info">
           <span>
             <b>Status</b>
           </span>
-          <span>&nbsp;&nbsp; {profileUser.relationShip}</span>
+          <span>&nbsp;&nbsp; {profileUser.relationship}</span>
         </div>
       ) : (
         ""

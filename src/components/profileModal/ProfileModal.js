@@ -1,12 +1,10 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import storage from "../../firebase/firebase";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { uploadImage } from "../../firebase/firebase";
 import { updateUser } from "../../actions/UserAction";
 import "../../pages/auth/Auth.css";
-import { async } from "@firebase/util";
 
 const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const theme = useMantineTheme();
@@ -33,29 +31,21 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
     }
   };
 
-  const uploadImage = async (image) => {
-    const filename = Date.now() + image.name;
-    const storageRef = ref(storage, `images/${filename}`);
-    const uploadTask = uploadBytesResumable(storageRef, image);
-    await uploadTask ;
-    const url = await getDownloadURL(uploadTask.snapshot.ref) ;
-    return url ;
-  };
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     let userData = formData;
-    let coverImageUrl ;
-    let profileImageUrl ;
+    let coverImageUrl;
+    let profileImageUrl;
     if (profileImage) {
       profileImageUrl = await uploadImage(profileImage);
-      userData.profileImage = profileImageUrl ;
+      userData.profileImage = profileImageUrl;
     }
     if (coverImage) {
       coverImageUrl = await uploadImage(coverImage, "coverImage");
-      userData.coverImage = coverImageUrl ;
+      userData.coverImage = coverImageUrl;
     }
-    dispatch(updateUser(params.id, userData)) ;
+    dispatch(updateUser(params.id, userData));
+    setModalOpened(false);
   };
 
   return (
