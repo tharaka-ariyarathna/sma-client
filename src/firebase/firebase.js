@@ -1,5 +1,5 @@
 import storage from './firebaseConfig' ;
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytesResumable, deleteObject } from "firebase/storage";
 
 export const uploadImage = async (image) => {
     const filename = Date.now() + image.name;
@@ -9,3 +9,8 @@ export const uploadImage = async (image) => {
     const url = await getDownloadURL(uploadTask.snapshot.ref) ;
     return url ;
   };
+
+export const deleteImage = (imageUrl) => {
+    const desertRef = ref(storage, imageUrl);
+    deleteObject(desertRef)
+}

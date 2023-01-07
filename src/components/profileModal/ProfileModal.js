@@ -2,7 +2,7 @@ import { Modal, useMantineTheme } from "@mantine/core";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { uploadImage } from "../../firebase/firebase";
+import { uploadImage, deleteImage } from "../../firebase/firebase";
 import { updateUser } from "../../actions/UserAction";
 import "../../pages/auth/Auth.css";
 
@@ -34,15 +34,19 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     let userData = formData;
-    let coverImageUrl;
-    let profileImageUrl;
     if (profileImage) {
-      profileImageUrl = await uploadImage(profileImage);
+      const profileImageUrl = await uploadImage(profileImage);
       userData.profileImage = profileImageUrl;
+      if(user.profileImage){
+        deleteImage(user.profileImage) ;
+      }
     }
     if (coverImage) {
-      coverImageUrl = await uploadImage(coverImage);
+      const coverImageUrl = await uploadImage(coverImage);
       userData.coverImage = coverImageUrl;
+      if(user.coverImage){
+        deleteImage(user.coverImage) ;
+      }
     }
     dispatch(updateUser(params.id, userData));
     setModalOpened((prev) => !prev);
