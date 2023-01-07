@@ -41,11 +41,11 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
       userData.profileImage = profileImageUrl;
     }
     if (coverImage) {
-      coverImageUrl = await uploadImage(coverImage, "coverImage");
+      coverImageUrl = await uploadImage(coverImage);
       userData.coverImage = coverImageUrl;
     }
     dispatch(updateUser(params.id, userData));
-    setModalOpened(false);
+    setModalOpened((prev) => !prev);
   };
 
   return (
@@ -69,7 +69,7 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
             type="text"
             className="infoInput"
             placeholder="First Name"
-            name="firstName"
+            name="firstname"
             onChange={handleInputChange}
             value={formData.firstname}
           />
@@ -77,7 +77,7 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
             type="text"
             className="infoInput"
             placeholder="Last Name"
-            name="lastName"
+            name="lastname"
             onChange={handleInputChange}
             value={formData.lastname}
           />

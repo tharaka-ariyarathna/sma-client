@@ -34,8 +34,8 @@ const InfoCard = () => {
   }, [user]);
 
   const handleLogOut = () => {
-    dispatch(logOut()) ;
-  }
+    dispatch(logOut());
+  };
 
   return (
     <div className="infocard">
@@ -89,7 +89,9 @@ const InfoCard = () => {
         ""
       )}
       {profileUser._id === user._id ? (
-        <button className="button lo-button"  onClick={handleLogOut}>Log Out</button>
+        <button className="button lo-button" onClick={handleLogOut}>
+          Log Out
+        </button>
       ) : (
         ""
       )}
