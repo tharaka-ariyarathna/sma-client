@@ -6,4 +6,6 @@ export const getUser = (userId) => API.get(`user/${userId}`) ;
 
 export const updateUser = (userId, data) => API.put(`user/${userId}`, data) ;
 
-export const getAllUsers = () => API.get(`user/`)
+export const getAllUsers = () => API.get(`user/`) ;
+
+export const followUser = (id, user) => API.put(`user/${id}/follow`, user)

@@ -2,6 +2,11 @@ import React from "react";
 import defaultProfileImage from "../../img/avatar1.png";
 
 const User = ({ person, user }) => {
+
+  const handleFollow = (e) => {
+    console.log("Following") ;
+  }
+
   return (
     <div className="follower">
       <div>
@@ -15,7 +20,7 @@ const User = ({ person, user }) => {
           <span>@{person.username}</span>
         </div>
       </div>
-      <button className="button fc-button">Follow</button>
+      <button className="button fc-button" onClick={handleFollow}>Follow</button>
     </div>
   );
 };
