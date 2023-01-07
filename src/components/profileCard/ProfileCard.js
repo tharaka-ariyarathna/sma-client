@@ -31,7 +31,7 @@ const ProfileCard = ({ location }) => {
           </div>
           <div className="vl"></div>
           <div className="follow">
-            <span>1</span>
+            <span>{user.followings.length}</span>
             <span>Followings</span>
           </div>
           {location === "profilepage" && (
