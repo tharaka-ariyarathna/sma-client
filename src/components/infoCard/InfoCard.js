@@ -34,8 +34,8 @@ const InfoCard = () => {
   }, [user]);
 
   const handleLogOut = () => {
-    dispatch(logOut()) ;
-  }
+    dispatch(logOut());
+  };
 
   return (
     <div className="infocard">
@@ -58,12 +58,12 @@ const InfoCard = () => {
           ""
         )}
       </div>
-      {profileUser.relationShip ? (
+      {profileUser.relationship ? (
         <div className="info">
           <span>
             <b>Status</b>
           </span>
-          <span>&nbsp;&nbsp; {profileUser.relationShip}</span>
+          <span>&nbsp;&nbsp; {profileUser.relationship}</span>
         </div>
       ) : (
         ""
@@ -89,7 +89,9 @@ const InfoCard = () => {
         ""
       )}
       {profileUser._id === user._id ? (
-        <button className="button lo-button"  onClick={handleLogOut}>Log Out</button>
+        <button className="button lo-button" onClick={handleLogOut}>
+          Log Out
+        </button>
       ) : (
         ""
       )}

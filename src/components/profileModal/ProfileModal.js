@@ -1,12 +1,10 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import storage from "../../firebase/firebase";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { uploadImage, deleteImage } from "../../firebase/firebase";
 import { updateUser } from "../../actions/UserAction";
 import "../../pages/auth/Auth.css";
-import { async } from "@firebase/util";
 
 const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const theme = useMantineTheme();
@@ -33,29 +31,25 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
     }
   };
 
-  const uploadImage = async (image) => {
-    const filename = Date.now() + image.name;
-    const storageRef = ref(storage, `images/${filename}`);
-    const uploadTask = uploadBytesResumable(storageRef, image);
-    await uploadTask ;
-    const url = await getDownloadURL(uploadTask.snapshot.ref) ;
-    return url ;
-  };
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     let userData = formData;
-    let coverImageUrl ;
-    let profileImageUrl ;
     if (profileImage) {
-      profileImageUrl = await uploadImage(profileImage);
-      userData.profileImage = profileImageUrl ;
+      const profileImageUrl = await uploadImage(profileImage);
+      userData.profileImage = profileImageUrl;
+      if(user.profileImage){
+        deleteImage(user.profileImage) ;
+      }
     }
     if (coverImage) {
-      coverImageUrl = await uploadImage(coverImage, "coverImage");
-      userData.coverImage = coverImageUrl ;
+      const coverImageUrl = await uploadImage(coverImage);
+      userData.coverImage = coverImageUrl;
+      if(user.coverImage){
+        deleteImage(user.coverImage) ;
+      }
     }
-    dispatch(updateUser(params.id, userData)) ;
+    dispatch(updateUser(params.id, userData));
+    setModalOpened((prev) => !prev);
   };
 
   return (
@@ -79,7 +73,7 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
             type="text"
             className="infoInput"
             placeholder="First Name"
-            name="firstName"
+            name="firstname"
             onChange={handleInputChange}
             value={formData.firstname}
           />
@@ -87,7 +81,7 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
             type="text"
             className="infoInput"
             placeholder="Last Name"
-            name="lastName"
+            name="lastname"
             onChange={handleInputChange}
             value={formData.lastname}
           />

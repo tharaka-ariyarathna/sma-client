@@ -9,9 +9,8 @@ import {
   UilTimes,
 } from "@iconscout/react-unicons";
 import { useDispatch, useSelector } from "react-redux";
-import { uploadImage, uploadPost } from "../../actions/UploadActions";
-import storage from "../../firebase/firebase";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { uploadPost } from "../../actions/UploadActions";
+import { uploadImage } from "../../firebase/firebase";
 
 const PostShare = () => {
   const [image, setImage] = useState(null);
@@ -33,54 +32,26 @@ const PostShare = () => {
     description.current.value = "";
   };
 
-  const handleImageSubmit = (e) => {
+  const handleImageSubmit = async (e) => {
     const newPost = {
       userId: user._id,
       description: description.current.value,
+      image: image.name,
     };
-
     if (image) {
-      
-      const data = new FormData();
-      const filename = Date.now() + image.name;
-      data.append("name", filename);
-      data.append("file", image);
-      newPost.image = filename;
-
-      try {
-        const storageRef = ref(storage, `images/${filename}`);
-        const uploadTask = uploadBytesResumable(storageRef, image);
-
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-          },
-          (error) => {
-            alert(error);
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              newPost.image_url = downloadURL;
-              dispatch(uploadPost(newPost));
-            });
-          }
-        );
-        //dispatch(uploadImage(data));
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      dispatch(uploadPost(newPost));
+      const imageUrl = await uploadImage(image);
+      newPost.image_url = imageUrl;
     }
+    dispatch(uploadPost(newPost));
     reset();
   };
 
   return (
     <div className="postShare">
-      <img src={user.profileImage? user.profileImage : DefaultImage} alt="User" />
+      <img
+        src={user.profileImage ? user.profileImage : DefaultImage}
+        alt="User"
+      />
       <div>
         <input
           type="text"

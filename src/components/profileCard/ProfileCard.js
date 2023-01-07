@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DefaultCoverImage from "../../img/cover.jpg";
-import DefaultImage from "../../img/avatar1.png";
+import DefaultProfileImage from "../../img/avatar1.png";
 import "./ProfileCard.css";
 
 const ProfileCard = ({ location }) => {
@@ -14,7 +14,7 @@ const ProfileCard = ({ location }) => {
     <div className="profileCard">
       <div className="profileImages">
         <img src={user.coverImage? user.coverImage : DefaultCoverImage} alt="Cover Photo" />
-        <img src={user.profileImage? user.profileImage : DefaultCoverImage} alt="Profile Pic" />
+        <img src={user.profileImage? user.profileImage : DefaultProfileImage} alt="Profile Pic" />
       </div>
 
       <div className="profileName">
@@ -31,7 +31,7 @@ const ProfileCard = ({ location }) => {
           </div>
           <div className="vl"></div>
           <div className="follow">
-            <span>1</span>
+            <span>{user.followings.length}</span>
             <span>Followings</span>
           </div>
           {location === "profilepage" && (
