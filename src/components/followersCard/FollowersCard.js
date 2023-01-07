@@ -7,12 +7,12 @@ import { getAllUsers } from "../../api/UserApi";
 
 const FollowersCard = () => {
   const {user} = useSelector((state) => state.Authreducer.authData.data);
-  const [data, setData] = useState({}) ;
+  const [people, setPeople] = useState([]) ;
 
   useEffect(() => {
     const fetchData = async() => {
       const {data} = await getAllUsers() ;
-      setData(data.data) ;
+      setPeople(data.data) ;
     }
     fetchData() ;
   },[])
@@ -20,8 +20,10 @@ const FollowersCard = () => {
   return (
     <div className="followersCard">
       <h3>People You May Know</h3>
-      {followers.map((person, id) => {
-        return <User person={person} key={id} />;
+      {people.map((person, id) => {
+        if(person._id !== user._id){
+          return <User person={person} key={id} user={user}/>
+        }
       })}
     </div>
   );

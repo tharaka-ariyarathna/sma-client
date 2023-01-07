@@ -1,12 +1,17 @@
 import React from "react";
+import defaultProfileImage from "../../img/avatar1.png";
 
-const User = ({ person }) => {
+const User = ({ person, user }) => {
   return (
     <div className="follower">
       <div>
-        <img className="followerImage" src={person.image} alt={person.name} />
+        <img
+          className="followerImage"
+          src={person.profileImage ? person.profileImage : defaultProfileImage}
+          alt={person.name}
+        />
         <div className="followerName">
-          <span>{person.name}</span>
+          <span>{`${person.firstname} ${person.lastname}`}</span>
           <span>@{person.username}</span>
         </div>
       </div>
