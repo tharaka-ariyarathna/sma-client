@@ -10,3 +10,8 @@ export const updateUser = (id, userData) => async(dispatch) => {
         dispatch({type:"UPDATE_ERROR"})
     }
 }
+
+export const followUser = (id, user) => async(dispatch) => {
+    dispatch({type: "FOLLOW_USER", userId : id})
+    await userApi.followUser(id, user) ;
+}

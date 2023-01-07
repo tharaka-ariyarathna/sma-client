@@ -1,10 +1,13 @@
 import React from "react";
 import defaultProfileImage from "../../img/avatar1.png";
+import { followUser } from "../../actions/UserAction";
+import { useDispatch } from "react-redux";
 
 const User = ({ person, user }) => {
+  const dispatch = useDispatch() ;
 
   const handleFollow = (e) => {
-    console.log("Following") ;
+    dispatch(followUser(person._id, user)) ;
   }
 
   return (
