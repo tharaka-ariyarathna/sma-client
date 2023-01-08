@@ -22,6 +22,10 @@ const Authreducer = (
       return {...state, authData: action.data, uploading: false, error: false}
     case "UPDATE_ERROR" :
       return { ...state, uploading: false, error: true };
+    case "FOLLOW_USER" :
+      return {...state, authData: action.data, uploading: false, error: false} ;
+    case "UNFOLLOW_USER" :
+      return {...state, authData: action.data, uploading: false, error: false} ;
     default:
       return state;
   }
