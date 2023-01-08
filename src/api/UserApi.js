@@ -10,4 +10,4 @@ export const getAllUsers = () => API.get(`user/`) ;
 
 export const followUser = (id, user) => API.put(`user/${id}/follow`, user)
 
-export const unfollowUser = (id, user) => API.put(`user/${id}/unfollow`) ;
+export const unfollowUser = (id, user) => API.put(`user/${id}/unfollow`, user) ;
