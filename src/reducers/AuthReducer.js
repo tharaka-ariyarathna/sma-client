@@ -22,6 +22,8 @@ const Authreducer = (
       return {...state, authData: action.data, uploading: false, error: false}
     case "UPDATE_ERROR" :
       return { ...state, uploading: false, error: true };
+    case "FOLLOW_USER" :
+      localStorage.setItem("test", JSON.stringify({ ...action?.data }))
     default:
       return state;
   }
