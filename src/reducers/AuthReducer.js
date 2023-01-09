@@ -6,7 +6,7 @@ const Authreducer = (
     case "AUTH_START":
       return { ...state, loading: true, error: false };
     case "AUTH_SUCCESS":
-      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
+      localStorage.setItem("profile", JSON.stringify({ ...action?.data.data }));
       localStorage.removeItem("error");
       return { ...state, authData: action.data, loading: false, error: false };
     case "AUTH_ERROR":
@@ -23,7 +23,7 @@ const Authreducer = (
     case "UPDATE_ERROR" :
       return { ...state, uploading: false, error: true };
     case "FOLLOW_USER" :
-      return {...state, authData: action.data, uploading: false, error: false} ;
+      return {...state, authData: action.data, uploading: false, error: false} ; /*authData: action.data, uploading: false, error: false*/
     case "UNFOLLOW_USER" :
       return {...state, authData: action.data, uploading: false, error: false} ;
     default:

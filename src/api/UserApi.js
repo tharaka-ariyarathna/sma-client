@@ -1,6 +1,14 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://sma-server.vercel.app/" });
+const API = axios.create({ baseURL: "http://localhost:5000/" });
+
+API.interceptors.request.use(req => {
+    if(localStorage.getItem("profile")){
+        //console.log(JSON.parse(localStorage.getItem("profile")).token)
+        req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`
+    }
+    return req ;
+})
 
 export const getUser = (userId) => API.get(`user/${userId}`) ;
 
