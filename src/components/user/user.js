@@ -9,6 +9,7 @@ const User = ({ person, user, friends }) => {
   const dispatch = useDispatch();
 
   const handleFollow = (e) => {
+    console.log(person._id) ;
     friends
       ? dispatch(unfollowUser(person._id, user))
       : dispatch(followUser(person._id, user));
