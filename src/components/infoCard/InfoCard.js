@@ -19,6 +19,7 @@ const InfoCard = () => {
   const userId = params.id;
 
   const { user } = useSelector((state) => state.Authreducer.authData.data);
+  const profileReducerData = useSelector((state) => state.ProfileReducer.user);
 
   useEffect(() => {
     const fetchProfileUser = async () => {
@@ -31,7 +32,7 @@ const InfoCard = () => {
     };
 
     fetchProfileUser();
-  });
+  },[profileReducerData, user]);
 
   const handleLogOut = () => {
     dispatch(logOut());
