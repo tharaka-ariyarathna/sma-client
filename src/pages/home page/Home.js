@@ -7,7 +7,7 @@ import "./Home.css";
 const Home = () => {
   return (
     <div className="home">
-      <Profileside />
+      <Profileside location={"homePage"} />
       <PostSide location={"homePage"}/>
       <RightSide />
     </div>

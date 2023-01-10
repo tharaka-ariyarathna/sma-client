@@ -4,11 +4,11 @@ import ProfileCard from "../profileCard/ProfileCard";
 import FollowersCard from "../followersCard/FollowersCard";
 import "./Profileside.css";
 
-const Profileside = () => {
+const Profileside = ({location}) => {
   return (
     <div className="profileside">
       <LogoSearch />
-      <ProfileCard location="homepage"/>
+      <ProfileCard location={location}/>
       <FollowersCard />
     </div>
   );
