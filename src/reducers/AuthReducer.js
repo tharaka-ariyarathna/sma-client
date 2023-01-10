@@ -18,7 +18,8 @@ const Authreducer = (
     case "UPDATE_START" :
       return {...state, uploading:true, error:false}
     case "UPDATE_SUCCESS" :
-      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
+      localStorage.setItem("profile", JSON.stringify({ ...action?.data.data }));
+      console.log(action.data.data) ;
       return {...state, authData: action.data, uploading: false, error: false}
     case "UPDATE_ERROR" :
       return { ...state, uploading: false, error: true };
