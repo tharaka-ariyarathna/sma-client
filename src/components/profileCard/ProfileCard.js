@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import DefaultCoverImage from "../../img/cover.jpg";
+import { getProfileUser } from "../../actions/UserAction";
 import DefaultProfileImage from "../../img/avatar1.png";
-import { getUser } from "../../api/UserApi";
 import "./ProfileCard.css";
 
 const ProfileCard = ({ location }) => {
   const { user } = useSelector((state) => state.Authreducer.authData.data);
   const { posts } = useSelector((state) => state.PostReducer);
   const profileUser = useSelector((state) => state.ProfileReducer.user);
-  const [profileUserData, setProfileUserData] = useState(user);
+  const [profileUserData, setProfileUserData] = useState(null);
+  const dispatch = useDispatch() ;
   const params = useParams();
   let id = params.id;
 
   useEffect(() => {
-    const getProfileUser = async () => {
-      setProfileUserData(profileUser);
-    };
     if (location !== "homePage" && id !== user._id) {
-      getProfileUser();
+      setProfileUserData(profileUser);
+    }else{
+      setProfileUserData(user) ;
     }
   });
+
+  const getUserData = () => {
+    dispatch(getProfileUser(user._id)) ;
+  }
 
   return (
     <>
@@ -48,7 +52,7 @@ const ProfileCard = ({ location }) => {
       <div className="profileName">
         <span>{`${profileUserData.firstname} ${profileUserData.lastname}`}</span>
         <span>
-          {profileUserData.worksAt ? user.worksAt : "Tell about yourself"}{" "}
+          {profileUserData.worksAt ? profileUserData.worksAt : "Tell about yourself"}{" "}
         </span>
       </div>
 
@@ -88,6 +92,7 @@ const ProfileCard = ({ location }) => {
             <Link
               to={`/profile/${user._id}`}
               style={{ textDecoration: "none", color: "inherit" }}
+              onClick={getUserData}
             >
               {" "}
               My Profile{" "}
@@ -95,7 +100,7 @@ const ProfileCard = ({ location }) => {
           </span>
         </>
       )}
-    </div>): ""}
+    </div>) : "" }
     </>
   );
 };

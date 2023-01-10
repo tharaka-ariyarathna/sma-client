@@ -35,18 +35,18 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
     e.preventDefault();
     let userData = formData;
     if (profileImage) {
-      const profileImageUrl = await uploadImage(profileImage);
-      userData.profileImage = profileImageUrl;
       if(user.profileImage){
         deleteImage(user.profileImage) ;
       }
+      const profileImageUrl = await uploadImage(profileImage);
+      userData.profileImage = profileImageUrl;
     }
     if (coverImage) {
-      const coverImageUrl = await uploadImage(coverImage);
-      userData.coverImage = coverImageUrl;
       if(user.coverImage){
         deleteImage(user.coverImage) ;
       }
+      const coverImageUrl = await uploadImage(coverImage);
+      userData.coverImage = coverImageUrl;
     }
     dispatch(updateUser(params.id, userData));
     setModalOpened((prev) => !prev);
