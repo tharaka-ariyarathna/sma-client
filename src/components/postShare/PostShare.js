@@ -21,9 +21,6 @@ const PostShare = ({location}) => {
   const uploading = useSelector((state) => state.PostReducer.uploading);
   const profileUser = useSelector(state => state.ProfileReducer.user) ;
 
-  console.log(user._id) ;
-  console.log(profileUser?._id) ;
-
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
