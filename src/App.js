@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./pages/home page/Home";
 import Profile from "./pages/profile page/Profile";
 import Auth from "./pages/auth/Auth";
+import Search from "./pages/search/Search";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -21,6 +22,10 @@ const App = () => {
         <Route
           path="/home"
           element={user ? <Home /> : <Navigate to="../auth" />}
+        />
+        <Route 
+          path="/home/search"
+          element={user ? <Search /> : <Navigate to="../auth/" />}
         />
         <Route
           path="/auth"

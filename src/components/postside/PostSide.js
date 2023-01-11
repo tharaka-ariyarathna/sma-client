@@ -6,7 +6,7 @@ import "./PostSide.css";
 const PostSide = ({location}) => {
   return (
     <div className="postSide">
-      <PostShare />
+      <PostShare location={location}/>
       <NewsFeed location={location}/>
     </div>
   );

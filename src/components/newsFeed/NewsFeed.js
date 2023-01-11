@@ -10,6 +10,7 @@ const NewsFeed = ({location}) => {
   const params = useParams() ;
   const{user} = useSelector((state) => state.Authreducer.authData.data  ) ;
   let {posts, loading} = useSelector(state => state.PostReducer) ;
+  const profileuser = useSelector(state => state.ProfileReducer.user) ;
 
   /*if(location==="profilePage"){
     //setPosts(prev =>prev.filter(post => post.userId === user._id))
@@ -26,12 +27,13 @@ const NewsFeed = ({location}) => {
 
   useEffect(() => {
     if(location==="profilePage"){
+      console.log(location) ;
       dispatch(getAllUserPosts(params.id)) ;
     }else{
-      dispatch(getTimelinePosts(user._id))
+      dispatch(getTimelinePosts(user._id)) ;
     }
     
-  }, [])
+  },[profileuser])
 
   return (
     <div className="newsFeed">
