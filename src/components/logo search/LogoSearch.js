@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "../../img/logo.png";
+import { Link } from "react-router-dom";
 import * as Unicons from "@iconscout/react-unicons";
 import "./LogoSearch.css";
 
@@ -10,7 +11,7 @@ const LogoSearch = () => {
       <div className="search">
         <input type="text" placeholder="#Explorer" />
         <div classname="si">
-          <Unicons.UilSearch />
+          <Link to={{pathname:`search`}} state={{location:"profile"} }style={{textDecoration:"none", color:"white"}} location="search"><Unicons.UilSearch /></Link>
         </div>
       </div>
     </div>

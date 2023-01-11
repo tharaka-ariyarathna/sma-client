@@ -17,7 +17,6 @@ const PostReducer = (
     case "RETRIEVING_START":
       return { ...state, loading: true, error: false };
     case "RETRIEVING_SUCCESS":
-      console.log(action.data) ;
       return {
         ...state,
         posts: action.data,

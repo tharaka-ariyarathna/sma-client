@@ -31,7 +31,6 @@ const NewsFeed = ({location}) => {
       dispatch(getAllUserPosts(params.id)) ;
     }else{
       dispatch(getTimelinePosts(user._id)) ;
-      console.log(location) ;
     }
     
   },[profileuser])
