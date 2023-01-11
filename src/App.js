@@ -2,7 +2,7 @@ import React from "react";
 import Home from "./pages/home page/Home";
 import Profile from "./pages/profile page/Profile";
 import Auth from "./pages/auth/Auth";
-import Search from "./pages/search/search";
+import Search from "./pages/search/Search";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
