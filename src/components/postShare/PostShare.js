@@ -12,13 +12,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { uploadPost } from "../../actions/UploadActions";
 import { uploadImage } from "../../firebase/firebase";
 
-const PostShare = () => {
+const PostShare = ({location}) => {
   const [image, setImage] = useState(null);
   const imageRef = useRef();
   const description = useRef();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.Authreducer.authData.data);
   const uploading = useSelector((state) => state.PostReducer.uploading);
+  const profileUser = useSelector(state => state.ProfileReducer.user) ;
+
+  console.log(user._id) ;
+  console.log(profileUser?._id) ;
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -47,7 +51,8 @@ const PostShare = () => {
   };
 
   return (
-    <div className="postShare">
+    <>
+      {location==="homePage" || user._id===profileUser?._id ? (<div className="postShare">
       <img
         src={user.profileImage ? user.profileImage : DefaultImage}
         alt="User"
@@ -104,7 +109,8 @@ const PostShare = () => {
           </div>
         )}
       </div>
-    </div>
+    </div>) : ""}
+    </>
   );
 };
 
