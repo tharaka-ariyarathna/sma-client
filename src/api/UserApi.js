@@ -19,3 +19,5 @@ export const getAllUsers = () => API.get(`user/`) ;
 export const followUser = (id, user) => API.put(`user/${id}/follow`, user)
 
 export const unfollowUser = (id, user) => API.put(`user/${id}/unfollow`, user) ;
+
+export const getUserByName = (username) => API.get(`user/search`, username) ;
