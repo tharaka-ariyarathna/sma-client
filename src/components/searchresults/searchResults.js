@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { getSearchResults } from "../../api/UserApi";
 import { SearchData } from "../../data/searchData";
 import './searchResults.css' ;
 
 const SearchResults = () => {
   const { searchData } = useLocation().state;
+  const [searchDataResults, setSearchDataresults] = useState({}) ;
 
   useEffect(() => {
-    const name = searchData.split(" ") ;
-    const firstname = name[0] ;
-    const lastname = name[1] ;
-    console.log(firstname) ;
-    console.log(lastname) ;
+    const fetchSearchResults = async() => {
+        console.log(searchDataResults)
+        const data = await getSearchResults(searchData) ;
+        console.log(data) ;
+    }
+    fetchSearchResults() ;
   })
 
   return (
