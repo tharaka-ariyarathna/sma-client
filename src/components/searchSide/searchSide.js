@@ -5,7 +5,6 @@ import SearchResult from "../searchresults/searchResults";
 import { useLocation } from "react-router-dom";
 
 const SearchSide = () => {
-  const { location } = useLocation().state;
   return (
     <div className="searchSide">
       <LogoSearch />

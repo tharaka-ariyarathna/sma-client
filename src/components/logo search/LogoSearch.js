@@ -9,7 +9,7 @@ const LogoSearch = () => {
   const [searchData, setSearchdata] = useState("");
 
   const handleInputChange = (e) => {
-    setSearchdata(e.target.value) ;
+    setSearchdata(e.target.value);
   };
 
   return (
@@ -20,20 +20,21 @@ const LogoSearch = () => {
           type="text"
           placeholder="#Explorer"
           onChange={handleInputChange}
+          required
         />
-        <div classname="si">
-          <Link
+        <div className="si">
+          {searchData? (<Link
             to={
               pathname === "/home/search"
                 ? { pathname: `` }
                 : { pathname: "/home/search" }
             }
-            state={{ location: "profile" }}
+            state={{ searchData: searchData }}
             style={{ textDecoration: "none", color: "white" }}
             location="search"
           >
             <Unicons.UilSearch />
-          </Link>
+          </Link>) : <Unicons.UilSearch />}
         </div>
       </div>
     </div>

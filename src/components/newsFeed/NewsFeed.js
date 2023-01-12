@@ -27,7 +27,6 @@ const NewsFeed = ({location}) => {
 
   useEffect(() => {
     if(location==="profilePage"){
-      console.log(location) ;
       dispatch(getAllUserPosts(params.id)) ;
     }else{
       dispatch(getTimelinePosts(user._id)) ;
