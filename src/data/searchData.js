@@ -18,5 +18,9 @@ export const SearchData = [
     {
         name: "Klhara Ariyarathna",
         username: "karl"
+    },
+    {
+        name: "Klhara Ariyarathna",
+        username: "karl"
     }
 ]
